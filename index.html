@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rix - Simple Key-Value Store CLI</title>
+    <style>
+        :root {
+            --primary: #4a6baf;
+            --secondary: #2c3e50;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --code-bg: #f5f5f5;
+            --border: #dee2e6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        section {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            color: var(--secondary);
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+        }
+        
+        code {
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        
+        .tab.active {
+            background-color: white;
+            border-bottom: 1px solid white;
+            margin-bottom: -1px;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+            background-color: white;
+            border: 1px solid var(--border);
+            border-radius: 0 5px 5px 5px;
+            padding: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .github-link {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .github-link:hover {
+            background-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>rix</h1>
+            <p>A simple, fast key-value store CLI with bash completion</p>
+            <a href="https://github.com/f3rix-xyz/rix" class="github-link">View on GitHub</a>
+        </div>
+    </header>
+    
+    <section id="usage">
+        <div class="container">
+            <h2>Usage</h2>
+            
+            <h3>Set a key-value pair</h3>
+            <pre><code>rix set github f3rix-xyz</code></pre>
+            
+            <h3>Get a value by key</h3>
+            <pre><code>rix get github
+# Output: f3rix-xyz</code></pre>
+            
+            <h3>List all keys</h3>
+            <pre><code>rix list</code></pre>
+            
+            <h3>Delete a key-value pair</h3>
+            <pre><code>rix delete github</code></pre>
+            
+            <h3>Tab Completion</h3>
+            <p>Type <code>rix get</code> and press Tab to see available keys:</p>
+            <pre><code>$ rix get [TAB]
+github  apikey  password</code></pre>
+        </div>
+    </section>
+    
+    <section id="installation">
+        <div class="container">
+            <h2>Installation</h2>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('ubuntu')">Ubuntu</div>
+                <div class="tab" onclick="switchTab('mac')">macOS</div>
+            </div>
+            
+            <div id="ubuntu" class="tab-content active">
+                <h3>Install on Ubuntu/Debian</h3>
+                <p>Download the latest .deb package and install:</p>
+                <pre><code>wget https://github.com/f3rix-xyz/rix/releases/download/v1.0.0/rix-package.deb
+sudo dpkg -i rix-package.deb</code></pre>
+                
+                <p>Or build from source:</p>
+                <pre><code>git clone https://github.com/f3rix-xyz/rix.git
+cd rix
+go build -o rix
+sudo cp rix /usr/local/bin/
+sudo cp rix-completion.bash /etc/bash_completion.d/rix</code></pre>
+            </div>
+            
+            <div id="mac" class="tab-content">
+                <h3>Install on macOS with Homebrew</h3>
+                <pre><code>brew tap f3rix-xyz/rix
+brew install rix</code></pre>
+                
+                <p>Or build from source:</p>
+                <pre><code>git clone https://github.com/f3rix-xyz/rix.git
+cd rix
+go build -o rix
+cp rix /usr/local/bin/
+mkdir -p $(brew --prefix)/etc/bash_completion.d
+cp rix-completion.bash $(brew --prefix)/etc/bash_completion.d/rix</code></pre>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 f3rix-xyz. Released under the MIT License.</p>
+        </div>
+    </footer>
+    
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Deactivate all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Activate the selected tab and content
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
